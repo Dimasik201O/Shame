@@ -32,7 +32,6 @@ public class BlackScreen extends SubCommand {
         catch (NumberFormatException e){
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fДлительность не является &6целым числом&f."));
         }
-        return;
     }
 
     @Override
