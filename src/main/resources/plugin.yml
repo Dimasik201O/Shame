@@ -1,0 +1,9 @@
+name: Shame
+version: '${project.version}'
+main: org.dimasik.shame.Shame
+api-version: '1.16'
+depend:
+  - packetevents
+commands:
+  shame:
+    permission: shame.use
