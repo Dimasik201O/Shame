@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.dimasik.shame.command.SubCommand;
 import org.dimasik.shame.modules.impl.DamageModule;
+import org.dimasik.shame.utils.Parser;
 
 import java.util.List;
 
@@ -27,14 +28,14 @@ public class Damage extends SubCommand {
             double factor = Double.parseDouble(args[2]);
             if(factor == 0){
                 DamageModule.editedDamages.remove(target);
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fПеременная &6удалена &fс памяти."));
+                sender.sendMessage(Parser.color("&b&l▶ &fПеременная &6удалена &fс памяти."));
                 return;
             }
             DamageModule.editedDamages.put(target, factor);
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fПеременная &6задана&f."));
+            sender.sendMessage(Parser.color("&b&l▶ &fПеременная &6задана&f."));
         }
         catch (NumberFormatException e){
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fМножитель должен быть &6числом двойной точности&f."));
+            sender.sendMessage(Parser.color("&b&l▶ &fМножитель должен быть &6числом двойной точности&f."));
             return;
         }
     }

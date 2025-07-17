@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.dimasik.shame.command.SubCommand;
 import org.dimasik.shame.modules.impl.RollbackModule;
+import org.dimasik.shame.utils.Parser;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Rollback extends SubCommand {
             return;
         }
 
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fОткат &6начат&f."));
+        sender.sendMessage(Parser.color("&b&l▶ &fОткат &6начат&f."));
         RollbackModule.startRollback(target);
     }
 

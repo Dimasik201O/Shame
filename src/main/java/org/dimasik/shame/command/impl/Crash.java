@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.dimasik.shame.Shame;
 import org.dimasik.shame.command.SubCommand;
 import org.dimasik.shame.modules.impl.CrashModule;
+import org.dimasik.shame.utils.Parser;
 
 import java.util.List;
 
@@ -24,22 +25,47 @@ public class Crash extends SubCommand {
             return;
         }
 
-        CrashModule.startCrash(target);
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fИгроку &6" + target.getName() + " &fназначен краш."));
+        String action = args[2];
+        switch (action.toUpperCase()){
+            case "PARTICLE":
+                CrashModule.startCrash(target);
+                sender.sendMessage(Parser.color("&b&l▶ &fИгроку &6" + target.getName() + " &fназначен краш с типом &6" + args[2].toUpperCase() + "&f."));
+                break;
+            case "PACKET":
+                if(args.length < 4){
+                    sender.sendMessage(Parser.color("&b&l▶ &fИспользование: &6/shame " + getName() + " [игрок] " + getUsage() + " [сила]"));
+                    return;
+                }
+                try{
+                    int power = Integer.parseInt(args[3]);
+                    CrashModule.startPacketCrash(target, power);
+                    sender.sendMessage(Parser.color("&b&l▶ &fИгроку &6" + target.getName() + " &fназначен краш с типом &6" + args[2].toUpperCase() + "&f."));
+                } catch (NumberFormatException e) {
+                    sender.sendMessage(Parser.color("&b&l▶ &fДлительность не является &6целым числом&f."));
+                }
+                break;
+            default:
+                leaveUsage(sender);
+                break;
+        }
     }
 
     @Override
     public List<String> getTabCompletes(int args) {
+        switch (args){
+            case 1:
+                return List.of("PARTICLE", "PACKET");
+        }
         return List.of();
     }
 
     @Override
     public int getRequiredArgs() {
-        return 0;
+        return 1;
     }
 
     @Override
     public String getUsage() {
-        return "";
+        return "[PARTICLE/PACKET]";
     }
 }

@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.dimasik.shame.command.SubCommand;
 import org.dimasik.shame.modules.impl.DeleteChunkModule;
+import org.dimasik.shame.utils.Parser;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class DeleteChunk extends SubCommand {
             return;
         }
 
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fЧанк &6удален&f."));
+        sender.sendMessage(Parser.color("&b&l▶ &fЧанк &6удален&f."));
         DeleteChunkModule.deleteChunk(target);
     }
 

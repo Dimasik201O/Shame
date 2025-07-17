@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.dimasik.shame.Shame;
 import org.dimasik.shame.command.SubCommand;
 import org.dimasik.shame.fakelags.trolling.TrollingType;
+import org.dimasik.shame.utils.Parser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,31 +24,31 @@ public class Troll extends SubCommand {
         TrollingType type;
 
         try {
-            type = TrollingType.valueOf(args[2]);
+            type = TrollingType.valueOf(args[2].toUpperCase());
         } catch (Exception ignore) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fТип троллинга &6не найден&f. Используйте: " +
+            sender.sendMessage(Parser.color("&b&l▶ &fТип троллинга &6не найден&f. Используйте: " +
                     "&6ALL_CANCEL &f| " +
                     "&6ENTITIES_NO_MOVE &f| " +
-                    "&6SPAM_SOUNx&5&A&D&9&F&BDS &f| " +
+                    "&6SPAM_SOUNDS &f| " +
                     "&6FANTOM_BLOCKS &f| " +
                     "&6SWAP_ITEMS"));
             return;
         }
 
         if (target == null) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fИгрок &6не найден."));
+            sender.sendMessage(Parser.color("&b&l▶ &fИгрок &6не найден."));
             return;
         }
 
         if (Shame.getTrollingManager().isAlreadyTrollingSetup(target, type)) {
             Shame.getTrollingManager().removeTrolling(target, type);
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fС игрока &6" + target.getName() + " &fснят троллинг &6" + type.name()));
+            sender.sendMessage(Parser.color("&b&l▶ &fС игрока &6" + target.getName() + " &fснят троллинг &6" + type.name()));
 
             return;
         }
 
         Shame.getTrollingManager().addTrolling(target, type);
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fИгроку &6" + target.getName() + " &fдобавлен троллинг &6" + type.name()));
+        sender.sendMessage(Parser.color("&b&l▶ &fИгроку &6" + target.getName() + " &fдобавлен троллинг &6" + type.name()));
 
     }
 

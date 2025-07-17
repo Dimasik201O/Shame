@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.dimasik.shame.Shame;
 import org.dimasik.shame.command.SubCommand;
 import org.dimasik.shame.modules.impl.BlackScreenModule;
+import org.dimasik.shame.utils.Parser;
 
 import java.util.List;
 
@@ -27,10 +28,10 @@ public class BlackScreen extends SubCommand {
         try {
             int time = Integer.parseInt(args[2]);
             BlackScreenModule.blackScreen(target, time);
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fИгроку &6" + target.getName() + " &fпоказан черный экран на &6" + time + " секунд&f."));
+            sender.sendMessage(Parser.color("&b&l▶ &fИгроку &6" + target.getName() + " &fпоказан черный экран на &6" + time + " секунд&f."));
         }
         catch (NumberFormatException e){
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l▶ &fДлительность не является &6целым числом&f."));
+            sender.sendMessage(Parser.color("&b&l▶ &fДлительность не является &6целым числом&f."));
         }
     }
 
