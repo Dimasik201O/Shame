@@ -155,13 +155,6 @@ public class BanModule extends Module {
     }
 
     @EventHandler
-    public void onDamage(EntityDamageEvent event) {
-        if (frozenPlayers.contains(event.getEntity().getUniqueId())) {
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
     public void onLeave(PlayerQuitEvent event) {
         if (frozenPlayers.contains(event.getPlayer().getUniqueId())) {
             String reason = reasons.getOrDefault(event.getPlayer(), "Не указана");
@@ -181,15 +174,15 @@ public class BanModule extends Module {
     }
 
     @EventHandler
-    public void onDamage(EntityDamageByEntityEvent event) {
-        if(event.getDamager() == null) return;
-        if (frozenPlayers.contains(event.getDamager().getUniqueId())) {
+    public void onCmd(PlayerCommandPreprocessEvent event) {
+        if(event.getPlayer() == null) return;
+        if (frozenPlayers.contains(event.getPlayer().getUniqueId())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void onCmd(PlayerCommandPreprocessEvent event) {
+    public void onCmd(PlayerTeleportEvent    event) {
         if(event.getPlayer() == null) return;
         if (frozenPlayers.contains(event.getPlayer().getUniqueId())) {
             event.setCancelled(true);
